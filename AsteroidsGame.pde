@@ -3,7 +3,7 @@ SpaceShip USSS;
 public void setup() 
 {
   size(500,500);
-  USSS =new SpaceShip();
+  USSS=new SpaceShip();
   USSS.setX(250);
   USSS.setY(250);
 
@@ -11,26 +11,72 @@ public void setup()
 public void draw() 
 {
   background(0);
+  USSS.move();
   USSS.show();
+}
+void keyPressed()
+{
+  if(key=='w') {USSS.accelerate(1);}
+  if(key=='a') {USSS.rotate(-10);}
+  if(key=='d') {USSS.rotate(10);}
 }
 class SpaceShip extends Floater  
 {   
+    int k=1;
     SpaceShip()
     {
-      corners=5;
+      corners=24;
       myColor=color(255);
       xCorners=new int[corners];
       yCorners=new int[corners];
-      xCorners[0]=10;
-      yCorners[0]=0;
-      xCorners[1]=0;
-      yCorners[1]=5;
-      xCorners[2]=-5;
-      yCorners[2]=10;
-      xCorners[3]=-5;
-      yCorners[3]=-10;
-      xCorners[4]=0;
-      yCorners[4]=-5;
+      xCorners[0]=13*k;
+      yCorners[0]=2*k;
+      xCorners[1]=10*k;
+      yCorners[1]=5*k;
+      xCorners[2]=6*k;
+      yCorners[2]=5*k;
+      xCorners[3]=3*k;
+      yCorners[3]=15*k;
+      xCorners[4]=-6*k;
+      yCorners[4]=15*k;
+      xCorners[5]=-7*k;
+      yCorners[5]=10*k;
+      xCorners[6]=-4*k;
+      yCorners[6]=10*k;
+      xCorners[7]=-5*k;
+      yCorners[7]=5*k;
+      xCorners[8]=-7*k;
+      yCorners[8]=5*k;
+      xCorners[9]=-10*k;
+      yCorners[9]=4*k;
+      xCorners[10]=-10*k;
+      yCorners[10]=2*k;
+      xCorners[11]=-9*k;
+      yCorners[11]=2*k;
+      xCorners[12]=-9*k;
+      yCorners[12]=-2*k;
+      xCorners[13]=-10*k;
+      yCorners[13]=-2*k;
+      xCorners[14]=-10*k;
+      yCorners[14]=-4*k;
+      xCorners[15]=-7*k;
+      yCorners[15]=-5*k;
+      xCorners[16]=-5*k;
+      yCorners[16]=-5*k;
+      xCorners[17]=-4*k;
+      yCorners[17]=-10*k;
+      xCorners[18]=-7*k;
+      yCorners[18]=-10*k;
+      xCorners[19]=-6*k;
+      yCorners[19]=-15*k;
+      xCorners[20]=3*k;
+      yCorners[20]=-15*k;
+      xCorners[21]=6*k;
+      yCorners[21]=-5*k;
+      xCorners[22]=10*k;
+      yCorners[22]=-5*k;
+      xCorners[23]=13*k;
+      yCorners[23]=-2*k;
       myCenterX=0;
       myCenterY=0;
       myDirectionX=0;
