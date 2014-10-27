@@ -22,7 +22,7 @@ void keyPressed()
 }
 class SpaceShip extends Floater  
 {   
-    int k=1;
+    int k=10;
     SpaceShip()
     {
       corners=24;
