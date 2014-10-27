@@ -16,25 +16,36 @@ public class AsteroidsGame extends PApplet {
 
 //your variable declarations here
 SpaceShip USSS;
+boolean accelerating=false;
+boolean leftTurn=false;
+boolean rightTurn=false;
 public void setup() 
 {
   size(500,500);
-  USSS =new SpaceShip();
+  USSS=new SpaceShip();
   USSS.setX(250);
   USSS.setY(250);
-
 }
 public void draw() 
 {
   background(0);
   USSS.move();
   USSS.show();
+  if(accelerating==true) {USSS.accelerate(0.1f);}
+  if(leftTurn==true) {USSS.rotate(-1);}
+  if(rightTurn==true) {USSS.rotate(1);}
 }
 public void keyPressed()
 {
-  if(key=='w') {USSS.accelerate(1);}
-  if(key=='a') {USSS.rotate(-10);}
-  if(key=='d') {USSS.rotate(10);}
+  if(key=='w') {accelerating=true;}
+  if(key=='a') {leftTurn=true;}
+  if(key=='d') {rightTurn=true;}
+}
+public void keyReleased()
+{
+  if(key=='w') {accelerating=false;}
+  if(key=='a') {leftTurn=false;}
+  if(key=='d') {rightTurn=false;}
 }
 class SpaceShip extends Floater  
 {   
@@ -42,7 +53,7 @@ class SpaceShip extends Floater
     SpaceShip()
     {
       corners=24;
-      myColor=color(255);
+      myColor=color(160,160,160);
       xCorners=new int[corners];
       yCorners=new int[corners];
       xCorners[0]=13*k;
@@ -109,6 +120,24 @@ class SpaceShip extends Floater
     public double getDirectionY() {return myDirectionY;}   
     public void setPointDirection(int degrees) {myPointDirection=degrees;}   
     public double getPointDirection() {return myPointDirection;} 
+    public void show ()  //Draws the floater at the current position  
+    {             
+      fill(myColor);   
+      stroke(myColor);    
+      //convert degrees to radians for sin and cos         
+      double dRadians = myPointDirection*(Math.PI/180);                 
+      int xRotatedTranslated, yRotatedTranslated;    
+      beginShape();         
+      for(int nI = 0; nI < corners; nI++)    
+      {     
+        //rotate and translate the coordinates of the floater using current direction 
+        xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+        yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+        vertex(xRotatedTranslated,yRotatedTranslated);    
+      }   
+      endShape(CLOSE);  
+      
+    }
 }
 abstract class Floater
 {   
