@@ -31,9 +31,9 @@ public void draw()
   background(0);
   USSS.move();
   USSS.show();
-  if(accelerating==true) {USSS.accelerate(0.1f);}
-  if(leftTurn==true) {USSS.rotate(-1);}
-  if(rightTurn==true) {USSS.rotate(1);}
+  if(accelerating==true) {USSS.accelerate(0.02f);}
+  if(leftTurn==true) {USSS.rotate(-3);}
+  if(rightTurn==true) {USSS.rotate(3);}
 }
 public void keyPressed()
 {
@@ -53,7 +53,7 @@ class SpaceShip extends Floater
     SpaceShip()
     {
       corners=24;
-      myColor=color(160,160,160);
+      myColor=color(110,110,110);
       xCorners=new int[corners];
       yCorners=new int[corners];
       xCorners[0]=13*k;
@@ -135,8 +135,43 @@ class SpaceShip extends Floater
         yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
         vertex(xRotatedTranslated,yRotatedTranslated);    
       }   
-      endShape(CLOSE);  
-      
+      endShape(CLOSE);
+      fill(225,90,0);
+      noStroke();
+      beginShape();
+      vertex((int)((-4 * Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-4* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-5* Math.cos(dRadians)) - (-5 * Math.sin(dRadians))+myCenterX),(int)((-5* Math.sin(dRadians)) + (-5 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((6* Math.cos(dRadians)) - (-5 * Math.sin(dRadians))+myCenterX),(int)((6* Math.sin(dRadians)) + (-5 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((4* Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((4* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+      endShape(CLOSE);
+      beginShape();
+      vertex((int)((-4 * Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-4* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-5* Math.cos(dRadians)) - (5 * Math.sin(dRadians))+myCenterX),(int)((-5* Math.sin(dRadians)) + (5 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((6* Math.cos(dRadians)) - (5 * Math.sin(dRadians))+myCenterX),(int)((6* Math.sin(dRadians)) + (5 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((4* Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((4* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+      endShape(CLOSE);
+      if(myDirectionY!=0 || myDirectionX!=0)
+      {
+        float k=100;
+        float r,g;
+        r=0+k*(float)(Math.sqrt(Math.pow(myDirectionX,2.0f)+Math.pow(myDirectionY,2.0f)));
+        if(r>=190) {r=190;}
+        g=90+k*(float)(Math.sqrt(Math.pow(myDirectionX,2.0f)+Math.pow(myDirectionY,2.0f)));
+        fill(r,g,255);
+        noStroke();
+        beginShape();
+        vertex((int)((-7 * Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-7* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+        vertex((int)((-6* Math.cos(dRadians)) - (-15 * Math.sin(dRadians))+myCenterX),(int)((-6* Math.sin(dRadians)) + (-15 * Math.cos(dRadians))+myCenterY));
+        vertex((int)((-10* Math.cos(dRadians)) - (-15 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (-15 * Math.cos(dRadians))+myCenterY));
+        vertex((int)((-10* Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+        endShape(CLOSE);
+        beginShape();
+        vertex((int)((-7 * Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-7* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+        vertex((int)((-6* Math.cos(dRadians)) - (15 * Math.sin(dRadians))+myCenterX),(int)((-6* Math.sin(dRadians)) + (15 * Math.cos(dRadians))+myCenterY));
+        vertex((int)((-10* Math.cos(dRadians)) - (15 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (15 * Math.cos(dRadians))+myCenterY));
+        vertex((int)((-10* Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+        endShape(CLOSE);
+      }
     }
 }
 abstract class Floater
