@@ -19,6 +19,7 @@ SpaceShip USSS;
 boolean accelerating=false;
 boolean leftTurn=false;
 boolean rightTurn=false;
+boolean braking=false;
 public void setup() 
 {
   size(500,500);
@@ -31,21 +32,30 @@ public void draw()
   background(0);
   USSS.move();
   USSS.show();
-  if(accelerating==true) {USSS.accelerate(0.02f);}
+  if(accelerating==true) {USSS.accelerate(0.03f);}
   if(leftTurn==true) {USSS.rotate(-3);}
   if(rightTurn==true) {USSS.rotate(3);}
+  if(braking==true) {USSS.brake();}
 }
 public void keyPressed()
 {
-  if(key=='w') {accelerating=true;}
-  if(key=='a') {leftTurn=true;}
-  if(key=='d') {rightTurn=true;}
+  if(key==CODED)
+  {
+    if(keyCode==UP) {accelerating=true;}
+    if(keyCode==LEFT) {leftTurn=true;}
+    if(keyCode==RIGHT) {rightTurn=true;}
+    if(keyCode==DOWN) {braking=true;}
+  } 
 }
 public void keyReleased()
 {
-  if(key=='w') {accelerating=false;}
-  if(key=='a') {leftTurn=false;}
-  if(key=='d') {rightTurn=false;}
+  if(key==CODED)
+  {
+    if(keyCode==UP) {accelerating=false;}
+    if(keyCode==LEFT) {leftTurn=false;}
+    if(keyCode==RIGHT) {rightTurn=false;}
+    if(keyCode==DOWN) {braking=false;}
+  } 
 }
 class SpaceShip extends Floater  
 {   
@@ -56,58 +66,32 @@ class SpaceShip extends Floater
       myColor=color(110,110,110);
       xCorners=new int[corners];
       yCorners=new int[corners];
-      xCorners[0]=13*k;
-      yCorners[0]=2*k;
-      xCorners[1]=10*k;
-      yCorners[1]=5*k;
-      xCorners[2]=6*k;
-      yCorners[2]=5*k;
-      xCorners[3]=3*k;
-      yCorners[3]=15*k;
-      xCorners[4]=-6*k;
-      yCorners[4]=15*k;
-      xCorners[5]=-7*k;
-      yCorners[5]=10*k;
-      xCorners[6]=-4*k;
-      yCorners[6]=10*k;
-      xCorners[7]=-5*k;
-      yCorners[7]=5*k;
-      xCorners[8]=-7*k;
-      yCorners[8]=5*k;
-      xCorners[9]=-10*k;
-      yCorners[9]=4*k;
-      xCorners[10]=-10*k;
-      yCorners[10]=2*k;
-      xCorners[11]=-9*k;
-      yCorners[11]=2*k;
-      xCorners[12]=-9*k;
-      yCorners[12]=-2*k;
-      xCorners[13]=-10*k;
-      yCorners[13]=-2*k;
-      xCorners[14]=-10*k;
-      yCorners[14]=-4*k;
-      xCorners[15]=-7*k;
-      yCorners[15]=-5*k;
-      xCorners[16]=-5*k;
-      yCorners[16]=-5*k;
-      xCorners[17]=-4*k;
-      yCorners[17]=-10*k;
-      xCorners[18]=-7*k;
-      yCorners[18]=-10*k;
-      xCorners[19]=-6*k;
-      yCorners[19]=-15*k;
-      xCorners[20]=3*k;
-      yCorners[20]=-15*k;
-      xCorners[21]=6*k;
-      yCorners[21]=-5*k;
-      xCorners[22]=10*k;
-      yCorners[22]=-5*k;
-      xCorners[23]=13*k;
-      yCorners[23]=-2*k;
-      myCenterX=0;
-      myCenterY=0;
-      myDirectionX=0;
-      myDirectionY=0;
+      xCorners[0]=13*k; yCorners[0]=2*k;
+      xCorners[1]=10*k; yCorners[1]=5*k;
+      xCorners[2]=6*k; yCorners[2]=5*k;
+      xCorners[3]=3*k; yCorners[3]=15*k;
+      xCorners[4]=-6*k; yCorners[4]=15*k;
+      xCorners[5]=-7*k; yCorners[5]=10*k;
+      xCorners[6]=-4*k; yCorners[6]=10*k;
+      xCorners[7]=-5*k; yCorners[7]=5*k;
+      xCorners[8]=-7*k; yCorners[8]=5*k;
+      xCorners[9]=-10*k; yCorners[9]=4*k;
+      xCorners[10]=-10*k; yCorners[10]=2*k;
+      xCorners[11]=-9*k; yCorners[11]=2*k;
+      xCorners[12]=-9*k; yCorners[12]=-2*k;
+      xCorners[13]=-10*k; yCorners[13]=-2*k;
+      xCorners[14]=-10*k; yCorners[14]=-4*k;
+      xCorners[15]=-7*k; yCorners[15]=-5*k;
+      xCorners[16]=-5*k; yCorners[16]=-5*k;
+      xCorners[17]=-4*k; yCorners[17]=-10*k;
+      xCorners[18]=-7*k; yCorners[18]=-10*k;
+      xCorners[19]=-6*k; yCorners[19]=-15*k;
+      xCorners[20]=3*k; yCorners[20]=-15*k;
+      xCorners[21]=6*k; yCorners[21]=-5*k;
+      xCorners[22]=10*k; yCorners[22]=-5*k;
+      xCorners[23]=13*k; yCorners[23]=-2*k;
+      myCenterX=0; myCenterY=0;
+      myDirectionX=0; myDirectionY=0;
       myPointDirection=0;
     }
     public void setX(int x) {myCenterX=x;}  
@@ -120,6 +104,14 @@ class SpaceShip extends Floater
     public double getDirectionY() {return myDirectionY;}   
     public void setPointDirection(int degrees) {myPointDirection=degrees;}   
     public double getPointDirection() {return myPointDirection;} 
+    public void brake() 
+    {
+      if(myDirectionX<=0.3f && myDirectionY<=0.3f && myDirectionX>=-0.3f && myDirectionY>=-0.3f)
+      {
+        setDirectionX(0);
+        setDirectionY(0);
+      }
+    }
     public void show ()  //Draws the floater at the current position  
     {             
       fill(myColor);   
@@ -152,7 +144,7 @@ class SpaceShip extends Floater
       endShape(CLOSE);
       if(myDirectionY!=0 || myDirectionX!=0)
       {
-        float k=100;
+        float k=150;
         float r,g;
         r=0+k*(float)(Math.sqrt(Math.pow(myDirectionX,2.0f)+Math.pow(myDirectionY,2.0f)));
         if(r>=190) {r=190;}
@@ -193,7 +185,6 @@ abstract class Floater
   abstract public double getDirectionY();   
   abstract public void setPointDirection(int degrees);   
   abstract public double getPointDirection(); 
-
   //Accelerates the floater in the direction it is pointing (myPointDirection)   
   public void accelerate (double dAmount)   
   {          
