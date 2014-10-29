@@ -4,6 +4,7 @@ public void setup()
 {
   size(500,500);
   background(0);
+  //frameRate(5);
   HMS_Euphoria=new SpaceShip();
   HMS_Euphoria.setX(width/2);
   HMS_Euphoria.setY(height/2);
@@ -150,7 +151,7 @@ class SpaceShip extends Floater
       setY((int)(Math.random()*301+100));
       setDirectionX(0);
       setDirectionY(0);
-      setPointDirection(0);
+      setPointDirection((int)(Math.random()*361));
     }
     public void brake() 
     {
