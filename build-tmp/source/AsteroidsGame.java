@@ -15,51 +15,54 @@ import java.io.IOException;
 public class AsteroidsGame extends PApplet {
 
 //your variable declarations here
-SpaceShip USSS;
-boolean accelerating=false;
-boolean leftTurn=false;
-boolean rightTurn=false;
-boolean braking=false;
+SpaceShip HMS_Euphoria;
+/*boolean HMS_Euphoria_accelerating=false;
+boolean HMS_Euphoria_leftTurn=false;
+boolean HMS_Euphoria_rightTurn=false;
+boolean HMS_Euphoria_braking=false;*/
 public void setup() 
 {
   size(500,500);
-  USSS=new SpaceShip();
-  USSS.setX(250);
-  USSS.setY(250);
+  HMS_Euphoria=new SpaceShip();
+  HMS_Euphoria.setX(250);
+  HMS_Euphoria.setY(250);
 }
 public void draw() 
 {
   background(0);
-  USSS.move();
-  USSS.show();
-  if(accelerating==true) {USSS.accelerate(0.03f);}
-  if(leftTurn==true) {USSS.rotate(-3);}
-  if(rightTurn==true) {USSS.rotate(3);}
-  if(braking==true) {USSS.brake();}
+  HMS_Euphoria.move();
+  HMS_Euphoria.show();
+  if(HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03f);}
+  if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-3);}
+  if(HMS_Euphoria.getRightTurn()==true) {HMS_Euphoria.rotate(3);}
+  if(HMS_Euphoria.getBraking()==true) {HMS_Euphoria.brake();}
+  //println("myDirectionX: "+HMS_Euphoria.getDirectionX());
+  //println("myDirectionY: "+HMS_Euphoria.getDirectionY());
 }
 public void keyPressed()
 {
   if(key==CODED)
   {
-    if(keyCode==UP) {accelerating=true;}
-    if(keyCode==LEFT) {leftTurn=true;}
-    if(keyCode==RIGHT) {rightTurn=true;}
-    if(keyCode==DOWN) {braking=true;}
+    if(keyCode==UP) {HMS_Euphoria.setAccelerating(true);}
+    if(keyCode==LEFT) {HMS_Euphoria.setLeftTurn(true);}
+    if(keyCode==RIGHT) {HMS_Euphoria.setRightTurn(true);}
+    if(keyCode==DOWN) {HMS_Euphoria.setBraking(true);}
   } 
 }
 public void keyReleased()
 {
   if(key==CODED)
   {
-    if(keyCode==UP) {accelerating=false;}
-    if(keyCode==LEFT) {leftTurn=false;}
-    if(keyCode==RIGHT) {rightTurn=false;}
-    if(keyCode==DOWN) {braking=false;}
+    if(keyCode==UP) {HMS_Euphoria.setAccelerating(false);}
+    if(keyCode==LEFT) {HMS_Euphoria.setLeftTurn(false);}
+    if(keyCode==RIGHT) {HMS_Euphoria.setRightTurn(false);}
+    if(keyCode==DOWN) {HMS_Euphoria.setBraking(false);}
   } 
 }
 class SpaceShip extends Floater  
 {   
     int k=1;
+    boolean accelerating, leftTurn, rightTurn, braking;
     SpaceShip()
     {
       corners=24;
@@ -93,6 +96,10 @@ class SpaceShip extends Floater
       myCenterX=0; myCenterY=0;
       myDirectionX=0; myDirectionY=0;
       myPointDirection=0;
+      accelerating=false;
+      leftTurn=false;
+      rightTurn=false;
+      braking=false;
     }
     public void setX(int x) {myCenterX=x;}  
     public int getX() {return (int)(myCenterX);}   
@@ -104,6 +111,14 @@ class SpaceShip extends Floater
     public double getDirectionY() {return myDirectionY;}   
     public void setPointDirection(int degrees) {myPointDirection=degrees;}   
     public double getPointDirection() {return myPointDirection;} 
+    public void setAccelerating(boolean x) {accelerating=x;}
+    public boolean getAccelerating() {return accelerating;}
+    public void setLeftTurn(boolean x) {leftTurn=x;}
+    public boolean getLeftTurn() {return leftTurn;}
+    public void setRightTurn(boolean x) {rightTurn=x;}
+    public boolean getRightTurn() {return rightTurn;}
+    public void setBraking(boolean x) {braking=x;}
+    public boolean getBraking() {return braking;}
     public void brake() 
     {
       if(myDirectionX<=0.3f && myDirectionY<=0.3f && myDirectionX>=-0.3f && myDirectionY>=-0.3f)
@@ -112,6 +127,33 @@ class SpaceShip extends Floater
         setDirectionY(0);
       }
     }
+    public void move ()   //move the floater in the current direction of travel
+    {      
+      if(myDirectionX>=3) {myDirectionX=3;}
+      if(myDirectionX<=-3) {myDirectionX=-3;}
+      if(myDirectionY>=3) {myDirectionY=3;}
+      if(myDirectionY<=-3) {myDirectionY=-3;}
+      //change the x and y coordinates by myDirectionX and myDirectionY       
+      myCenterX += myDirectionX;    
+      myCenterY += myDirectionY;     
+      //wrap around screen    
+      if(myCenterX >width)
+      {     
+        myCenterX = 0;    
+      }    
+      else if (myCenterX<0)
+      {     
+        myCenterX = width;    
+      }    
+      if(myCenterY >height)
+      {    
+        myCenterY = 0;    
+      }   
+      else if (myCenterY < 0)
+     {     
+        myCenterY = height;    
+      }   
+    } 
     public void show ()  //Draws the floater at the current position  
     {             
       fill(myColor);   
