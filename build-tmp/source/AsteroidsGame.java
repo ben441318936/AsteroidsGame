@@ -33,8 +33,8 @@ public void draw()
   HMS_Euphoria.move();
   HMS_Euphoria.show();
   if(HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03f);}
-  if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-3);}
-  if(HMS_Euphoria.getRightTurn()==true) {HMS_Euphoria.rotate(3);}
+  if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-5);}
+  if(HMS_Euphoria.getRightTurn()==true) {HMS_Euphoria.rotate(5);}
   if(HMS_Euphoria.getBraking()==true) {HMS_Euphoria.brake();}
   //println("myDirectionX: "+HMS_Euphoria.getDirectionX());
   //println("myDirectionY: "+HMS_Euphoria.getDirectionY());
