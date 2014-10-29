@@ -1,19 +1,47 @@
 //your variable declarations here
 SpaceShip HMS_Euphoria;
-/*boolean HMS_Euphoria_accelerating=false;
-boolean HMS_Euphoria_leftTurn=false;
-boolean HMS_Euphoria_rightTurn=false;
-boolean HMS_Euphoria_braking=false;*/
 public void setup() 
 {
   size(500,500);
+  background(0);
   HMS_Euphoria=new SpaceShip();
-  HMS_Euphoria.setX(250);
-  HMS_Euphoria.setY(250);
+  HMS_Euphoria.setX(width/2);
+  HMS_Euphoria.setY(height/2);
 }
 public void draw() 
 {
-  background(0);
+  if(HMS_Euphoria.getHyperspacing()==false && HMS_Euphoria.getAccelerating()==false)
+  {
+    fill(0,0,0);
+    rect(0,0,width,height);
+  }
+  if(HMS_Euphoria.getHyperspacing()==true || HMS_Euphoria.getAccelerating()==true)
+  {
+    if(HMS_Euphoria.getAccelerating()==true)
+    {
+      if(HMS_Euphoria.getDirectionY()<=3 && HMS_Euphoria.getDirectionY()>=-3 && HMS_Euphoria.getDirectionX()>=-3 && HMS_Euphoria.getDirectionX()<=3)
+      {
+        fill(0,0,0,60);
+        rect(0, 0, width, height);
+      }
+      else 
+      {
+        fill(0,0,0);
+        rect(0, 0, width, height);  
+      }
+    }
+    if(HMS_Euphoria.getHyperspacing()==true)
+    {
+      fill(0,0,0,20);
+      rect(0, 0, width, height);
+      HMS_Euphoria.setHyperspaceCounter(HMS_Euphoria.getHyperspaceCounter()+1);
+      if(HMS_Euphoria.getHyperspaceCounter()>60)
+      {
+        HMS_Euphoria.setHyperspaceCounter(0);
+        HMS_Euphoria.setHyperspacing(false);
+      }
+    }
+  }
   HMS_Euphoria.move();
   HMS_Euphoria.show();
   if(HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03);}
@@ -25,6 +53,11 @@ public void draw()
 }
 void keyPressed()
 {
+  if(key=='h') 
+  {
+    HMS_Euphoria.setHyperspacing(true);
+    HMS_Euphoria.hyperspace();
+  }
   if(key==CODED)
   {
     if(keyCode==UP) {HMS_Euphoria.setAccelerating(true);}
@@ -45,10 +78,13 @@ void keyReleased()
 }
 class SpaceShip extends Floater  
 {   
-    int k=1;
-    boolean accelerating, leftTurn, rightTurn, braking;
+    private int k;
+    private boolean accelerating, leftTurn, rightTurn, braking, hyperspacing;
+    private int hyperspaceCounter;
     SpaceShip()
     {
+      k=1;
+      hyperspaceCounter=0;
       corners=24;
       myColor=color(110,110,110);
       xCorners=new int[corners];
@@ -84,6 +120,7 @@ class SpaceShip extends Floater
       leftTurn=false;
       rightTurn=false;
       braking=false;
+      hyperspacing=false;
     }
     public void setX(int x) {myCenterX=x;}  
     public int getX() {return (int)(myCenterX);}   
@@ -103,6 +140,18 @@ class SpaceShip extends Floater
     public boolean getRightTurn() {return rightTurn;}
     public void setBraking(boolean x) {braking=x;}
     public boolean getBraking() {return braking;}
+    public void setHyperspacing(boolean x) {hyperspacing=x;}
+    public boolean getHyperspacing() {return hyperspacing;}
+    public void setHyperspaceCounter(int x) {hyperspaceCounter=x;}
+    public int getHyperspaceCounter() {return hyperspaceCounter;}
+    public void hyperspace() 
+    {
+      setX((int)(Math.random()*301+100));
+      setY((int)(Math.random()*301+100));
+      setDirectionX(0);
+      setDirectionY(0);
+      setPointDirection(0);
+    }
     public void brake() 
     {
       if(myDirectionX<=0.3 && myDirectionY<=0.3 && myDirectionX>=-0.3 && myDirectionY>=-0.3)
