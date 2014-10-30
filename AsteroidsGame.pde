@@ -15,6 +15,10 @@ public void draw()
   {
     fill(0,0,0);
     rect(0,0,width,height);
+    fill(255,255,255);
+    ellipse(100,100,50,50);
+    ellipse(250,250,50,50);
+    ellipse(400, 400, 60, 60);
   }
   if(HMS_Euphoria.getHyperspacing()==true || HMS_Euphoria.getAccelerating()==true)
   {
@@ -24,11 +28,19 @@ public void draw()
       {
         fill(0,0,0,60);
         rect(0, 0, width, height);
+        fill(255,255,255);
+        ellipse(100,100,50,50);
+        ellipse(250,250,50,50);
+        ellipse(400, 400, 60, 60);
       }
       else 
       {
         fill(0,0,0);
-        rect(0, 0, width, height);  
+        rect(0, 0, width, height); 
+        fill(255,255,255);
+        ellipse(100,100,50,50);
+        ellipse(250,250,50,50);
+        ellipse(400, 400, 60, 60); 
       }
     }
     if(HMS_Euphoria.getHyperspacing()==true)
@@ -46,8 +58,8 @@ public void draw()
   HMS_Euphoria.move();
   HMS_Euphoria.show();
   if(HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03);}
-  if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-5);}
-  if(HMS_Euphoria.getRightTurn()==true) {HMS_Euphoria.rotate(5);}
+  if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-2);}
+  if(HMS_Euphoria.getRightTurn()==true) {HMS_Euphoria.rotate(2);}
   if(HMS_Euphoria.getBraking()==true) {HMS_Euphoria.brake();}
   //println("myDirectionX: "+HMS_Euphoria.getDirectionX());
   //println("myDirectionY: "+HMS_Euphoria.getDirectionY());
@@ -79,88 +91,88 @@ void keyReleased()
 }
 class SpaceShip extends Floater  
 {   
-    private int k;
-    private boolean accelerating, leftTurn, rightTurn, braking, hyperspacing;
-    private int hyperspaceCounter;
-    SpaceShip()
+  private int k;
+  private boolean accelerating, leftTurn, rightTurn, braking, hyperspacing;
+  private int hyperspaceCounter;
+  SpaceShip()
+  {
+    k=1;
+    hyperspaceCounter=0;
+    corners=24;
+    myColor=color(110,110,110);
+    xCorners=new int[corners];
+    yCorners=new int[corners];
+    xCorners[0]=13*k; yCorners[0]=2*k;
+    xCorners[1]=10*k; yCorners[1]=5*k;
+    xCorners[2]=6*k; yCorners[2]=5*k;
+    xCorners[3]=3*k; yCorners[3]=15*k;
+    xCorners[4]=-6*k; yCorners[4]=15*k;
+    xCorners[5]=-7*k; yCorners[5]=10*k;
+    xCorners[6]=-4*k; yCorners[6]=10*k;
+    xCorners[7]=-5*k; yCorners[7]=5*k;
+    xCorners[8]=-7*k; yCorners[8]=5*k;
+    xCorners[9]=-10*k; yCorners[9]=4*k;
+    xCorners[10]=-10*k; yCorners[10]=2*k;
+    xCorners[11]=-9*k; yCorners[11]=2*k;
+    xCorners[12]=-9*k; yCorners[12]=-2*k;
+    xCorners[13]=-10*k; yCorners[13]=-2*k;
+    xCorners[14]=-10*k; yCorners[14]=-4*k;
+    xCorners[15]=-7*k; yCorners[15]=-5*k;
+    xCorners[16]=-5*k; yCorners[16]=-5*k;
+    xCorners[17]=-4*k; yCorners[17]=-10*k;
+    xCorners[18]=-7*k; yCorners[18]=-10*k;
+    xCorners[19]=-6*k; yCorners[19]=-15*k;
+    xCorners[20]=3*k; yCorners[20]=-15*k;
+    xCorners[21]=6*k; yCorners[21]=-5*k;
+    xCorners[22]=10*k; yCorners[22]=-5*k;
+    xCorners[23]=13*k; yCorners[23]=-2*k;
+    myCenterX=0; myCenterY=0;
+    myDirectionX=0; myDirectionY=0;
+    myPointDirection=0;
+    accelerating=false;
+    leftTurn=false;
+    rightTurn=false;
+    braking=false;
+    hyperspacing=false;
+  }
+  public void setX(int x) {myCenterX=x;}  
+  public int getX() {return (int)(myCenterX);}   
+  public void setY(int y) {myCenterY=y;}   
+  public int getY() {return (int)(myCenterY);}   
+  public void setDirectionX(double x) {myDirectionX=x;}   
+  public double getDirectionX() {return myDirectionX;}   
+  public void setDirectionY(double y) {myDirectionY=y;}   
+  public double getDirectionY() {return myDirectionY;}   
+  public void setPointDirection(int degrees) {myPointDirection=degrees;}   
+  public double getPointDirection() {return myPointDirection;} 
+  public void setAccelerating(boolean x) {accelerating=x;}
+  public boolean getAccelerating() {return accelerating;}
+  public void setLeftTurn(boolean x) {leftTurn=x;}
+  public boolean getLeftTurn() {return leftTurn;}
+  public void setRightTurn(boolean x) {rightTurn=x;}
+  public boolean getRightTurn() {return rightTurn;}
+  public void setBraking(boolean x) {braking=x;}
+  public boolean getBraking() {return braking;}
+  public void setHyperspacing(boolean x) {hyperspacing=x;}
+  public boolean getHyperspacing() {return hyperspacing;}
+  public void setHyperspaceCounter(int x) {hyperspaceCounter=x;}
+  public int getHyperspaceCounter() {return hyperspaceCounter;}
+  public void hyperspace() 
+  {
+    setX((int)(Math.random()*301+100));
+    setY((int)(Math.random()*301+100));
+    setDirectionX(0);
+    setDirectionY(0);
+    setPointDirection((int)(Math.random()*361));
+  }
+  public void brake() 
+  {
+    if(myDirectionX<=0.3 && myDirectionY<=0.3 && myDirectionX>=-0.3 && myDirectionY>=-0.3)
     {
-      k=1;
-      hyperspaceCounter=0;
-      corners=24;
-      myColor=color(110,110,110);
-      xCorners=new int[corners];
-      yCorners=new int[corners];
-      xCorners[0]=13*k; yCorners[0]=2*k;
-      xCorners[1]=10*k; yCorners[1]=5*k;
-      xCorners[2]=6*k; yCorners[2]=5*k;
-      xCorners[3]=3*k; yCorners[3]=15*k;
-      xCorners[4]=-6*k; yCorners[4]=15*k;
-      xCorners[5]=-7*k; yCorners[5]=10*k;
-      xCorners[6]=-4*k; yCorners[6]=10*k;
-      xCorners[7]=-5*k; yCorners[7]=5*k;
-      xCorners[8]=-7*k; yCorners[8]=5*k;
-      xCorners[9]=-10*k; yCorners[9]=4*k;
-      xCorners[10]=-10*k; yCorners[10]=2*k;
-      xCorners[11]=-9*k; yCorners[11]=2*k;
-      xCorners[12]=-9*k; yCorners[12]=-2*k;
-      xCorners[13]=-10*k; yCorners[13]=-2*k;
-      xCorners[14]=-10*k; yCorners[14]=-4*k;
-      xCorners[15]=-7*k; yCorners[15]=-5*k;
-      xCorners[16]=-5*k; yCorners[16]=-5*k;
-      xCorners[17]=-4*k; yCorners[17]=-10*k;
-      xCorners[18]=-7*k; yCorners[18]=-10*k;
-      xCorners[19]=-6*k; yCorners[19]=-15*k;
-      xCorners[20]=3*k; yCorners[20]=-15*k;
-      xCorners[21]=6*k; yCorners[21]=-5*k;
-      xCorners[22]=10*k; yCorners[22]=-5*k;
-      xCorners[23]=13*k; yCorners[23]=-2*k;
-      myCenterX=0; myCenterY=0;
-      myDirectionX=0; myDirectionY=0;
-      myPointDirection=0;
-      accelerating=false;
-      leftTurn=false;
-      rightTurn=false;
-      braking=false;
-      hyperspacing=false;
-    }
-    public void setX(int x) {myCenterX=x;}  
-    public int getX() {return (int)(myCenterX);}   
-    public void setY(int y) {myCenterY=y;}   
-    public int getY() {return (int)(myCenterY);}   
-    public void setDirectionX(double x) {myDirectionX=x;}   
-    public double getDirectionX() {return myDirectionX;}   
-    public void setDirectionY(double y) {myDirectionY=y;}   
-    public double getDirectionY() {return myDirectionY;}   
-    public void setPointDirection(int degrees) {myPointDirection=degrees;}   
-    public double getPointDirection() {return myPointDirection;} 
-    public void setAccelerating(boolean x) {accelerating=x;}
-    public boolean getAccelerating() {return accelerating;}
-    public void setLeftTurn(boolean x) {leftTurn=x;}
-    public boolean getLeftTurn() {return leftTurn;}
-    public void setRightTurn(boolean x) {rightTurn=x;}
-    public boolean getRightTurn() {return rightTurn;}
-    public void setBraking(boolean x) {braking=x;}
-    public boolean getBraking() {return braking;}
-    public void setHyperspacing(boolean x) {hyperspacing=x;}
-    public boolean getHyperspacing() {return hyperspacing;}
-    public void setHyperspaceCounter(int x) {hyperspaceCounter=x;}
-    public int getHyperspaceCounter() {return hyperspaceCounter;}
-    public void hyperspace() 
-    {
-      setX((int)(Math.random()*301+100));
-      setY((int)(Math.random()*301+100));
       setDirectionX(0);
       setDirectionY(0);
-      setPointDirection((int)(Math.random()*361));
     }
-    public void brake() 
-    {
-      if(myDirectionX<=0.3 && myDirectionY<=0.3 && myDirectionX>=-0.3 && myDirectionY>=-0.3)
-      {
-        setDirectionX(0);
-        setDirectionY(0);
-      }
-    }
+  }
     public void move ()   //move the floater in the current direction of travel
     {      
       if(myDirectionX>=3) {myDirectionX=3;}
@@ -184,7 +196,7 @@ class SpaceShip extends Floater
         myCenterY = 0;    
       }   
       else if (myCenterY < 0)
-     {     
+      {     
         myCenterY = height;    
       }   
     } 
@@ -241,9 +253,9 @@ class SpaceShip extends Floater
         endShape(CLOSE);
       }
     }
-}
-abstract class Floater
-{   
+  }
+  abstract class Floater
+  {   
   protected int corners;  //the number of corners, a triangular floater has 3   
   protected int[] xCorners;   
   protected int[] yCorners;   
