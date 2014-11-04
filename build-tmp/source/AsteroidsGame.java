@@ -270,6 +270,10 @@ class SpaceShip extends Floater
       }
     }
   }
+  /*class Asteroid extends Floater
+  {
+
+  }*/
   abstract class Floater
   {   
   protected int corners;  //the number of corners, a triangular floater has 3   
