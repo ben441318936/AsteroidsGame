@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AsteroidsGame extends PApplet {
 
 //your variable declarations here
-SpaceShip HMS_Euphoria;
+private SpaceShip HMS_Euphoria;
 public void setup() 
 {
   size(500,500);
@@ -32,9 +32,6 @@ public void draw()
     fill(0,0,0);
     rect(0,0,width,height);
     fill(255,255,255);
-    ellipse(100,100,50,50);
-    ellipse(250,250,50,50);
-    ellipse(400, 400, 60, 60);
   }
   if(HMS_Euphoria.getHyperspacing()==true || HMS_Euphoria.getAccelerating()==true)
   {
@@ -45,18 +42,12 @@ public void draw()
         fill(0,0,0,60);
         rect(0, 0, width, height);
         fill(255,255,255);
-        ellipse(100,100,50,50);
-        ellipse(250,250,50,50);
-        ellipse(400, 400, 60, 60);
       }
       else 
       {
         fill(0,0,0);
         rect(0, 0, width, height); 
-        fill(255,255,255);
-        ellipse(100,100,50,50);
-        ellipse(250,250,50,50);
-        ellipse(400, 400, 60, 60); 
+        fill(255,255,255); 
       }
     }
     if(HMS_Euphoria.getHyperspacing()==true)
@@ -77,8 +68,6 @@ public void draw()
   if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-2);}
   if(HMS_Euphoria.getRightTurn()==true) {HMS_Euphoria.rotate(2);}
   if(HMS_Euphoria.getBraking()==true) {HMS_Euphoria.brake();}
-  //println("myDirectionX: "+HMS_Euphoria.getDirectionX());
-  //println("myDirectionY: "+HMS_Euphoria.getDirectionY());
 }
 public void keyPressed()
 {
@@ -105,6 +94,7 @@ public void keyReleased()
     if(keyCode==DOWN) {HMS_Euphoria.setBraking(false);}
   } 
 }
+public int colour(int r, int g, int b) {return color(r,g,b);}
 class SpaceShip extends Floater  
 {   
   private int k;
@@ -115,7 +105,7 @@ class SpaceShip extends Floater
     k=1;
     hyperspaceCounter=0;
     corners=24;
-    myColor=color(110,110,110);
+    myColor=colour(110,110,110);
     xCorners=new int[corners];
     yCorners=new int[corners];
     xCorners[0]=13*k; yCorners[0]=2*k;
@@ -270,12 +260,18 @@ class SpaceShip extends Floater
       }
     }
   }
-  /*class Asteroid extends Floater
+  /*class Asteroids extends Floater
   {
-
+    Asteroids()
+    {
+      corners=6;
+      xCorners=new int[corners];
+      yCorners=new int[corners];
+      myColor=color(64,64,64);
+    }
   }*/
-  abstract class Floater
-  {   
+abstract class Floater
+{   
   protected int corners;  //the number of corners, a triangular floater has 3   
   protected int[] xCorners;   
   protected int[] yCorners;   
