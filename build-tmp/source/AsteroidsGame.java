@@ -179,97 +179,118 @@ class SpaceShip extends Floater
       setDirectionY(0);
     }
   }
-    public void move ()   //move the floater in the current direction of travel
-    {      
-      if(myDirectionX>=3) {myDirectionX=3;}
-      if(myDirectionX<=-3) {myDirectionX=-3;}
-      if(myDirectionY>=3) {myDirectionY=3;}
-      if(myDirectionY<=-3) {myDirectionY=-3;}
-      //change the x and y coordinates by myDirectionX and myDirectionY       
-      myCenterX += myDirectionX;    
-      myCenterY += myDirectionY;     
-      //wrap around screen    
-      if(myCenterX >width)
-      {     
-        myCenterX = 0;    
-      }    
-      else if (myCenterX<0)
-      {     
-        myCenterX = width;    
-      }    
-      if(myCenterY >height)
-      {    
-        myCenterY = 0;    
-      }   
-      else if (myCenterY < 0)
-      {     
-        myCenterY = height;    
-      }   
-    } 
-    public void show ()  //Draws the floater at the current position  
-    {             
-      fill(myColor);   
-      stroke(myColor);    
-      //convert degrees to radians for sin and cos         
-      double dRadians = myPointDirection*(Math.PI/180);                 
-      int xRotatedTranslated, yRotatedTranslated;    
-      beginShape();         
-      for(int nI = 0; nI < corners; nI++)    
-      {     
-        //rotate and translate the coordinates of the floater using current direction 
-        xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
-        yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
-        vertex(xRotatedTranslated,yRotatedTranslated);    
-      }   
-      endShape(CLOSE);
-      fill(225,90,0);
+  public void move ()   //move the floater in the current direction of travel
+  {      
+    if(myDirectionX>=3) {myDirectionX=3;}
+    if(myDirectionX<=-3) {myDirectionX=-3;}
+    if(myDirectionY>=3) {myDirectionY=3;}
+    if(myDirectionY<=-3) {myDirectionY=-3;}
+    //change the x and y coordinates by myDirectionX and myDirectionY       
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+    //wrap around screen    
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }   
+  } 
+  public void show ()  //Draws the floater at the current position  
+  {             
+    fill(myColor);   
+    stroke(myColor);    
+    //convert degrees to radians for sin and cos         
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);
+    fill(225,90,0);
+    noStroke();
+    beginShape();
+    vertex((int)((-4 * Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-4* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+    vertex((int)((-5* Math.cos(dRadians)) - (-5 * Math.sin(dRadians))+myCenterX),(int)((-5* Math.sin(dRadians)) + (-5 * Math.cos(dRadians))+myCenterY));
+    vertex((int)((6* Math.cos(dRadians)) - (-5 * Math.sin(dRadians))+myCenterX),(int)((6* Math.sin(dRadians)) + (-5 * Math.cos(dRadians))+myCenterY));
+    vertex((int)((4* Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((4* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+    endShape(CLOSE);
+    beginShape();
+    vertex((int)((-4 * Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-4* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+    vertex((int)((-5* Math.cos(dRadians)) - (5 * Math.sin(dRadians))+myCenterX),(int)((-5* Math.sin(dRadians)) + (5 * Math.cos(dRadians))+myCenterY));
+    vertex((int)((6* Math.cos(dRadians)) - (5 * Math.sin(dRadians))+myCenterX),(int)((6* Math.sin(dRadians)) + (5 * Math.cos(dRadians))+myCenterY));
+    vertex((int)((4* Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((4* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+    endShape(CLOSE);
+    if(myDirectionY!=0 || myDirectionX!=0)
+    {
+      float k=150;
+      float r,g;
+      r=0+k*(float)(Math.sqrt(Math.pow(myDirectionX,2.0f)+Math.pow(myDirectionY,2.0f)));
+      if(r>=190) {r=190;}
+      g=90+k*(float)(Math.sqrt(Math.pow(myDirectionX,2.0f)+Math.pow(myDirectionY,2.0f)));
+      fill(r,g,255);
       noStroke();
       beginShape();
-      vertex((int)((-4 * Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-4* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
-      vertex((int)((-5* Math.cos(dRadians)) - (-5 * Math.sin(dRadians))+myCenterX),(int)((-5* Math.sin(dRadians)) + (-5 * Math.cos(dRadians))+myCenterY));
-      vertex((int)((6* Math.cos(dRadians)) - (-5 * Math.sin(dRadians))+myCenterX),(int)((6* Math.sin(dRadians)) + (-5 * Math.cos(dRadians))+myCenterY));
-      vertex((int)((4* Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((4* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-7 * Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-7* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-6* Math.cos(dRadians)) - (-15 * Math.sin(dRadians))+myCenterX),(int)((-6* Math.sin(dRadians)) + (-15 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-10* Math.cos(dRadians)) - (-15 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (-15 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-10* Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
       endShape(CLOSE);
       beginShape();
-      vertex((int)((-4 * Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-4* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
-      vertex((int)((-5* Math.cos(dRadians)) - (5 * Math.sin(dRadians))+myCenterX),(int)((-5* Math.sin(dRadians)) + (5 * Math.cos(dRadians))+myCenterY));
-      vertex((int)((6* Math.cos(dRadians)) - (5 * Math.sin(dRadians))+myCenterX),(int)((6* Math.sin(dRadians)) + (5 * Math.cos(dRadians))+myCenterY));
-      vertex((int)((4* Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((4* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-7 * Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-7* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-6* Math.cos(dRadians)) - (15 * Math.sin(dRadians))+myCenterX),(int)((-6* Math.sin(dRadians)) + (15 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-10* Math.cos(dRadians)) - (15 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (15 * Math.cos(dRadians))+myCenterY));
+      vertex((int)((-10* Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
       endShape(CLOSE);
-      if(myDirectionY!=0 || myDirectionX!=0)
-      {
-        float k=150;
-        float r,g;
-        r=0+k*(float)(Math.sqrt(Math.pow(myDirectionX,2.0f)+Math.pow(myDirectionY,2.0f)));
-        if(r>=190) {r=190;}
-        g=90+k*(float)(Math.sqrt(Math.pow(myDirectionX,2.0f)+Math.pow(myDirectionY,2.0f)));
-        fill(r,g,255);
-        noStroke();
-        beginShape();
-        vertex((int)((-7 * Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-7* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
-        vertex((int)((-6* Math.cos(dRadians)) - (-15 * Math.sin(dRadians))+myCenterX),(int)((-6* Math.sin(dRadians)) + (-15 * Math.cos(dRadians))+myCenterY));
-        vertex((int)((-10* Math.cos(dRadians)) - (-15 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (-15 * Math.cos(dRadians))+myCenterY));
-        vertex((int)((-10* Math.cos(dRadians)) - (-10 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (-10 * Math.cos(dRadians))+myCenterY));
-        endShape(CLOSE);
-        beginShape();
-        vertex((int)((-7 * Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-7* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
-        vertex((int)((-6* Math.cos(dRadians)) - (15 * Math.sin(dRadians))+myCenterX),(int)((-6* Math.sin(dRadians)) + (15 * Math.cos(dRadians))+myCenterY));
-        vertex((int)((-10* Math.cos(dRadians)) - (15 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (15 * Math.cos(dRadians))+myCenterY));
-        vertex((int)((-10* Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
-        endShape(CLOSE);
-      }
     }
   }
-  /*class Asteroids extends Floater
+}
+class Asteroids extends Floater
+{
+  Asteroids()
   {
-    Asteroids()
-    {
-      corners=6;
-      xCorners=new int[corners];
-      yCorners=new int[corners];
-      myColor=color(64,64,64);
-    }
-  }*/
+    corners=6;
+    xCorners=new int[corners];
+    yCorners=new int[corners];
+    xCorners[0]=5;  yCorners[0]=0;
+    xCorners[1]=3;  yCorners[1]=3;
+    xCorners[2]=-3; yCorners[2]=5;
+    xCorners[3]=-4; yCorners[3]=0;
+    xCorners[4]=-2; yCorners[4]=-4;
+    xCorners[5]=4;  yCorners[5]=-3;
+    myColor=colour(64,64,64);
+    myCenterX=Math.random()*301+100;
+    myCenterY=Math.random()*301+100;
+    myDirectionX=Math.random();
+    myDirectionY=Math.random();
+    myPointDirection=0;
+  }
+  public void setX(int x) {myCenterX=x;}  
+  public int getX() {return (int)(myCenterX);}   
+  public void setY(int y) {myCenterY=y;}   
+  public int getY() {return (int)(myCenterY);}   
+  public void setDirectionX(double x) {myDirectionX=x;}   
+  public double getDirectionX() {return myDirectionX;}   
+  public void setDirectionY(double y) {myDirectionY=y;}   
+  public double getDirectionY() {return myDirectionY;}   
+  public void setPointDirection(int degrees) {myPointDirection=degrees;}   
+  public double getPointDirection() {return myPointDirection;}
+}
 abstract class Floater
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
