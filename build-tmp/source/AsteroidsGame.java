@@ -16,6 +16,8 @@ public class AsteroidsGame extends PApplet {
 
 //your variable declarations here
 private SpaceShip HMS_Euphoria;
+private Star[]starField=new Star[100];
+private Asteroids Ragnarock;
 public void setup() 
 {
   size(500,500);
@@ -24,6 +26,9 @@ public void setup()
   HMS_Euphoria=new SpaceShip();
   HMS_Euphoria.setX(width/2);
   HMS_Euphoria.setY(height/2);
+  for(int i=0;i<starField.length;i++) {starField[i]=new Star();}
+  //Ragnarock=new asteroid
+
 }
 public void draw() 
 {
@@ -32,6 +37,7 @@ public void draw()
     fill(0,0,0);
     rect(0,0,width,height);
     fill(255,255,255);
+    for(int i=0;i<starField.length;i++) {starField[i].show();}
   }
   if(HMS_Euphoria.getHyperspacing()==true || HMS_Euphoria.getAccelerating()==true)
   {
@@ -42,18 +48,21 @@ public void draw()
         fill(0,0,0,60);
         rect(0, 0, width, height);
         fill(255,255,255);
+        for(int i=0;i<starField.length;i++) {starField[i].show();}
       }
       else 
       {
         fill(0,0,0);
         rect(0, 0, width, height); 
         fill(255,255,255); 
+        for(int i=0;i<starField.length;i++) {starField[i].show();}
       }
     }
     if(HMS_Euphoria.getHyperspacing()==true)
     {
       fill(0,0,0,20);
       rect(0, 0, width, height);
+      for(int i=0;i<starField.length;i++) {starField[i].show();}
       HMS_Euphoria.setHyperspaceCounter(HMS_Euphoria.getHyperspaceCounter()+1);
       if(HMS_Euphoria.getHyperspaceCounter()>60)
       {
@@ -95,6 +104,23 @@ public void keyReleased()
   } 
 }
 public int colour(int r, int g, int b) {return color(r,g,b);}
+
+class Star
+{
+  private double myX, myY;
+  private int myColor;
+  public Star()
+  {
+    myX=Math.random()*501;
+    myY=Math.random()*501;
+    myColor=colour(255,255,255);
+  }
+  public void show()
+  {
+    fill(myColor);
+    ellipse((float)myX, (float)myY, 2, 2);
+  }
+}
 class SpaceShip extends Floater  
 {   
   private int k;
