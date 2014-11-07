@@ -32,7 +32,7 @@ public void setup()
 }
 public void draw() 
 {
-  if(HMS_Euphoria.getHyperspacing()==false && HMS_Euphoria.getAccelerating()==false)
+  if(HMS_Euphoria.getHyperspacing()==false /*&& HMS_Euphoria.getAccelerating()==false*/)
   {
     fill(0,0,0);
     rect(0,0,width,height);
@@ -41,7 +41,7 @@ public void draw()
   }
   if(HMS_Euphoria.getHyperspacing()==true || HMS_Euphoria.getAccelerating()==true)
   {
-    if(HMS_Euphoria.getAccelerating()==true)
+    /*if(HMS_Euphoria.getAccelerating()==true)
     {
       if(HMS_Euphoria.getDirectionY()<=3 && HMS_Euphoria.getDirectionY()>=-3 && HMS_Euphoria.getDirectionX()>=-3 && HMS_Euphoria.getDirectionX()<=3)
       {
@@ -57,7 +57,7 @@ public void draw()
         fill(255,255,255); 
         for(int i=0;i<starField.length;i++) {starField[i].show();}
       }
-    }
+    }*/
     if(HMS_Euphoria.getHyperspacing()==true)
     {
       fill(0,0,0,20);
