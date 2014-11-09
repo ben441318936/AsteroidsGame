@@ -14,10 +14,10 @@ import java.io.IOException;
 
 public class AsteroidsGame extends PApplet {
 
-//your variable declarations here
+//variable declarations here
 private SpaceShip HMS_Euphoria;
 private Star[]starField=new Star[100];
-private Asteroids Ragnarock;
+private Asteroid []Ragnarock;
 public void setup() 
 {
   size(500,500);
@@ -27,8 +27,8 @@ public void setup()
   HMS_Euphoria.setX(width/2);
   HMS_Euphoria.setY(height/2);
   for(int i=0;i<starField.length;i++) {starField[i]=new Star();}
-  //Ragnarock=new asteroid
-
+  Ragnarock=new Asteroid[10];
+  for(int i=0;i<Ragnarock.length;i++) {Ragnarock[i]=new Asteroid();}
 }
 public void draw() 
 {
@@ -71,6 +71,11 @@ public void draw()
       }
     }
   }
+  for(int i=0;i<Ragnarock.length;i++) 
+    {
+      Ragnarock[i].move();
+      Ragnarock[i].show();
+    }
   HMS_Euphoria.move();
   HMS_Euphoria.show();
   if(HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03f);}
@@ -286,25 +291,28 @@ class SpaceShip extends Floater
     }
   }
 }
-class Asteroids extends Floater
+class Asteroid extends Floater
 {
-  Asteroids()
+  double myRotSpeed;
+  Asteroid()
   {
+    int k=2;
     corners=6;
     xCorners=new int[corners];
     yCorners=new int[corners];
-    xCorners[0]=5;  yCorners[0]=0;
-    xCorners[1]=3;  yCorners[1]=3;
-    xCorners[2]=-3; yCorners[2]=5;
-    xCorners[3]=-4; yCorners[3]=0;
-    xCorners[4]=-2; yCorners[4]=-4;
-    xCorners[5]=4;  yCorners[5]=-3;
-    myColor=colour(64,64,64);
+    xCorners[0]=5*k;  yCorners[0]=0*k;
+    xCorners[1]=3*k;  yCorners[1]=3*k;
+    xCorners[2]=-3*k; yCorners[2]=5*k;
+    xCorners[3]=-4*k; yCorners[3]=0*k;
+    xCorners[4]=-2*k; yCorners[4]=-4*k;
+    xCorners[5]=4*k;  yCorners[5]=-3*k;
+    myColor=colour(90,90,90);
     myCenterX=Math.random()*301+100;
     myCenterY=Math.random()*301+100;
     myDirectionX=Math.random();
     myDirectionY=Math.random();
     myPointDirection=0;
+    myRotSpeed=Math.random()*11-5;
   }
   public void setX(int x) {myCenterX=x;}  
   public int getX() {return (int)(myCenterX);}   
@@ -316,6 +324,32 @@ class Asteroids extends Floater
   public double getDirectionY() {return myDirectionY;}   
   public void setPointDirection(int degrees) {myPointDirection=degrees;}   
   public double getPointDirection() {return myPointDirection;}
+  public void move ()   //move the floater in the current direction of travel
+  {      
+    //change the x and y coordinates by myDirectionX and myDirectionY       
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+    //wrap around screen    
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }   
+    translate((float)myCenterX, (float)myCenterY);
+    rotate((int)myRotSpeed);
+    translate((float)-myCenterX, (float)-myCenterY);
+  }   
 }
 abstract class Floater
 {   
@@ -355,7 +389,6 @@ abstract class Floater
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
-
     //wrap around screen    
     if(myCenterX >width)
     {     
