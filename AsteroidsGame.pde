@@ -1,6 +1,7 @@
 //variable declarations here
 private SpaceShip HMS_Euphoria;
 private Star[]starField=new Star[100];
+private Laser pew;
 private Asteroid []Ragnarock;
 public void setup() 
 {
@@ -10,6 +11,7 @@ public void setup()
   HMS_Euphoria=new SpaceShip();
   HMS_Euphoria.setX(width/2);
   HMS_Euphoria.setY(height/2);
+  pew=new Laser();
   for(int i=0;i<starField.length;i++) {starField[i]=new Star();}
   Ragnarock=new Asteroid[10];
   for(int i=0;i<Ragnarock.length;i++) {Ragnarock[i]=new Asteroid();}
@@ -61,6 +63,8 @@ public void draw()
       Ragnarock[i].show();
     }
   HMS_Euphoria.move();
+  pew.move();
+  pew.show();
   HMS_Euphoria.show();
   if(HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03);}
   if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-2);}
@@ -74,6 +78,7 @@ public void keyPressed()
     HMS_Euphoria.setHyperspacing(true);
     HMS_Euphoria.hyperspace();
   }
+  if(key==' ') {pew.setFired(true);}
   if(key==CODED)
   {
     if(keyCode==UP) {HMS_Euphoria.setAccelerating(true);}
@@ -115,7 +120,7 @@ class SpaceShip extends Floater
   private int k;
   private boolean accelerating, leftTurn, rightTurn, braking, hyperspacing;
   private int hyperspaceCounter;
-  SpaceShip()
+  public SpaceShip()
   {
     k=1;
     hyperspaceCounter=0;
@@ -273,6 +278,66 @@ class SpaceShip extends Floater
       vertex((int)((-10* Math.cos(dRadians)) - (10 * Math.sin(dRadians))+myCenterX),(int)((-10* Math.sin(dRadians)) + (10 * Math.cos(dRadians))+myCenterY));
       endShape(CLOSE);
     }
+  }
+}
+class Laser
+{
+  private double myX,myY,myPointDirection,mySpeed;
+  private int myColor;
+  private boolean fired,flying;
+  public Laser()
+  {
+    myX=HMS_Euphoria.getX();
+    myY=HMS_Euphoria.getY();
+    myPointDirection=HMS_Euphoria.getPointDirection();
+    mySpeed=10;
+    myColor=colour(0,0,0);
+    fired=false;
+    flying=false;
+  }
+  public double getX() {return myX;}
+  public void setX(double x) {myX=x;}
+  public double getY() {return myY;}
+  public void setY(double y) {myY=y;}
+  public double getPointDirection() {return myPointDirection;}
+  public void setPointDirection(double x) {myPointDirection=x;}
+  public double getSpeed() {return mySpeed;}
+  public void setSpeed(int s) {mySpeed=s;}
+  public boolean getFired() {return fired;}
+  public void setFired(boolean x) {fired=x;}
+  public void move()
+  {
+    if(fired==false && flying==false)
+    {
+      myX=HMS_Euphoria.getX();
+      myY=HMS_Euphoria.getY();
+      myPointDirection=HMS_Euphoria.getPointDirection();
+    }
+    if(fired==true && flying==false)
+    {
+      myX=HMS_Euphoria.getX();
+      myY=HMS_Euphoria.getY();
+      myPointDirection=HMS_Euphoria.getPointDirection();
+      flying=true;
+    }
+    if(flying==true && fired==true)
+    {
+      myColor=colour(255,0,0);
+      myX=myX+Math.cos(Math.toRadians(myPointDirection))*mySpeed;
+      myY=myY+Math.sin(Math.toRadians(myPointDirection))*mySpeed;
+      if(myX>width || myX<0 || myY>height || myY<0)
+      {
+        myColor=colour(0,0,0);
+        fired=false;
+        flying=false;
+      }
+    }
+  }
+  public void show()
+  {
+    strokeWeight(3);
+    stroke(myColor);
+    line((float)myX, (float)myY, (float)(myX+5*Math.cos(Math.toRadians(myPointDirection))), (float)(myY+5*Math.sin(Math.toRadians(myPointDirection))));
   }
 }
 class Asteroid extends Floater
