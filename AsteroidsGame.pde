@@ -2,7 +2,7 @@
 private SpaceShip HMS_Euphoria;
 private Star[]starField=new Star[100];
 private Laser pew;
-private Asteroid []Ragnarock;
+private ArrayList <Asteroid> Ragnarock=new ArrayList <Asteroid>();
 public void setup() 
 {
   size(500,500);
@@ -13,8 +13,7 @@ public void setup()
   HMS_Euphoria.setY(height/2);
   pew=new Laser();
   for(int i=0;i<starField.length;i++) {starField[i]=new Star();}
-  Ragnarock=new Asteroid[10];
-  for(int i=0;i<Ragnarock.length;i++) {Ragnarock[i]=new Asteroid();}
+  for(int i=0;i<Ragnarock.size();i++) {Ragnarock.add(i,new Asteroid());}
 }
 public void draw() 
 {
@@ -57,11 +56,11 @@ public void draw()
       }
     }
   }
-  for(int i=0;i<Ragnarock.length;i++) 
-    {
-      Ragnarock[i].move();
-      Ragnarock[i].show();
-    }
+  for(int i=0;i<Ragnarock.size();i++) 
+  {
+    Ragnarock.get(i).move();
+    Ragnarock.get(i).show();
+  }
   HMS_Euphoria.move();
   pew.move();
   pew.show();
