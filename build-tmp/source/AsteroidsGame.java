@@ -336,8 +336,9 @@ class Laser
     if(flying==true && fired==true)
     {
       myColor=colour(255,0,0);
-      myX=myX+Math.cos(Math.toRadians(myPointDirection))*mySpeed;
-      myY=myY+Math.sin(Math.toRadians(myPointDirection))*mySpeed;
+      double dRadians=myPointDirection*(Math.PI/180);
+      myX=myX+Math.cos(dRadians)*mySpeed;
+      myY=myY+Math.sin(dRadians)*mySpeed;
       if(myX>width || myX<0 || myY>height || myY<0)
       {
         myColor=colour(0,0,0);
