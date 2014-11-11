@@ -23,13 +23,17 @@ public void setup()
 {
   size(500,500);
   background(0);
-  //frameRate(5);
+  frameRate(5);
   HMS_Euphoria=new SpaceShip();
   HMS_Euphoria.setX(width/2);
   HMS_Euphoria.setY(height/2);
   pew=new Laser();
   for(int i=0;i<starField.length;i++) {starField[i]=new Star();}
-  for(int i=0;i<Ragnarock.size();i++) {Ragnarock.add(i,new Asteroid());}
+  for(int i=0;i<10;i++) 
+    {
+      Ragnarock.add(new Asteroid());
+      println("huh?");
+    }
 }
 public void draw() 
 {
@@ -113,7 +117,7 @@ public void keyReleased()
   } 
 }
 public int colour(int r, int g, int b) {return color(r,g,b);}
-
+public int colour(int i) {return color(i);}
 class Star
 {
   private double myX, myY;
@@ -143,37 +147,35 @@ class SpaceShip extends Floater
     myColor=colour(110,110,110);
     xCorners=new int[corners];
     yCorners=new int[corners];
-    xCorners[0]=13*k; yCorners[0]=2*k;
-    xCorners[1]=10*k; yCorners[1]=5*k;
-    xCorners[2]=6*k; yCorners[2]=5*k;
-    xCorners[3]=3*k; yCorners[3]=15*k;
-    xCorners[4]=-6*k; yCorners[4]=15*k;
-    xCorners[5]=-7*k; yCorners[5]=10*k;
-    xCorners[6]=-4*k; yCorners[6]=10*k;
-    xCorners[7]=-5*k; yCorners[7]=5*k;
-    xCorners[8]=-7*k; yCorners[8]=5*k;
-    xCorners[9]=-10*k; yCorners[9]=4*k;
+    xCorners[0]=13*k;   yCorners[0]=2*k;
+    xCorners[1]=10*k;   yCorners[1]=5*k;
+    xCorners[2]=6*k;    yCorners[2]=5*k;
+    xCorners[3]=3*k;    yCorners[3]=15*k;
+    xCorners[4]=-6*k;   yCorners[4]=15*k;
+    xCorners[5]=-7*k;   yCorners[5]=10*k;
+    xCorners[6]=-4*k;   yCorners[6]=10*k;
+    xCorners[7]=-5*k;   yCorners[7]=5*k;
+    xCorners[8]=-7*k;   yCorners[8]=5*k;
+    xCorners[9]=-10*k;  yCorners[9]=4*k;
     xCorners[10]=-10*k; yCorners[10]=2*k;
-    xCorners[11]=-9*k; yCorners[11]=2*k;
-    xCorners[12]=-9*k; yCorners[12]=-2*k;
+    xCorners[11]=-9*k;  yCorners[11]=2*k;
+    xCorners[12]=-9*k;  yCorners[12]=-2*k;
     xCorners[13]=-10*k; yCorners[13]=-2*k;
     xCorners[14]=-10*k; yCorners[14]=-4*k;
-    xCorners[15]=-7*k; yCorners[15]=-5*k;
-    xCorners[16]=-5*k; yCorners[16]=-5*k;
-    xCorners[17]=-4*k; yCorners[17]=-10*k;
-    xCorners[18]=-7*k; yCorners[18]=-10*k;
-    xCorners[19]=-6*k; yCorners[19]=-15*k;
-    xCorners[20]=3*k; yCorners[20]=-15*k;
-    xCorners[21]=6*k; yCorners[21]=-5*k;
-    xCorners[22]=10*k; yCorners[22]=-5*k;
-    xCorners[23]=13*k; yCorners[23]=-2*k;
-    myCenterX=0; myCenterY=0;
-    myDirectionX=0; myDirectionY=0;
+    xCorners[15]=-7*k;  yCorners[15]=-5*k;
+    xCorners[16]=-5*k;  yCorners[16]=-5*k;
+    xCorners[17]=-4*k;  yCorners[17]=-10*k;
+    xCorners[18]=-7*k;  yCorners[18]=-10*k;
+    xCorners[19]=-6*k;  yCorners[19]=-15*k;
+    xCorners[20]=3*k;   yCorners[20]=-15*k;
+    xCorners[21]=6*k;   yCorners[21]=-5*k;
+    xCorners[22]=10*k;  yCorners[22]=-5*k;
+    xCorners[23]=13*k;  yCorners[23]=-2*k;
+    myCenterX=0;        myCenterY=0;
+    myDirectionX=0;     myDirectionY=0;
     myPointDirection=0;
-    accelerating=false;
-    leftTurn=false;
-    rightTurn=false;
-    braking=false;
+    accelerating=false; braking=false;
+    leftTurn=false;     rightTurn=false;
     hyperspacing=false;
   }
   public void setX(int x) {myCenterX=x;}  
@@ -371,12 +373,31 @@ class Asteroid extends Floater
     xCorners[4]=-2*k; yCorners[4]=-4*k;
     xCorners[5]=4*k;  yCorners[5]=-3*k;
     myColor=colour(90,90,90);
-    myCenterX=Math.random()*301+100;
-    myCenterY=Math.random()*301+100;
-    myDirectionX=Math.random();
-    myDirectionY=Math.random();
+    myDirectionX=Math.random()*2-0.95f;
+    myDirectionY=Math.random()*2-0.95f;
     myPointDirection=0;
     myRotSpeed=Math.random()*11-5;
+    int i=(int)(Math.random()*4+1);
+    if(i==1)
+    {
+      myCenterX=Math.random()*21;
+      myCenterY=Math.random()*21;
+    }
+    if(i==2)
+    {
+      myCenterX=Math.random()*21+480;
+      myCenterY=Math.random()*21;
+    }
+    if(i==3)
+    {
+      myCenterX=Math.random()*21;
+      myCenterY=Math.random()*21+480;
+    }
+    if(i==4)
+    {
+      myCenterX=Math.random()*21+480;
+      myCenterY=Math.random()*21+480;
+    }
   }
   public void setX(int x) {myCenterX=x;}  
   public int getX() {return (int)(myCenterX);}   
