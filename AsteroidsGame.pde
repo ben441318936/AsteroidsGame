@@ -334,7 +334,8 @@ class Laser
   {
     strokeWeight(3);
     stroke(myColor);
-    line((int)myX, (int)myY, (int)(myX+5*Math.cos(Math.toRadians(myPointDirection))), (int)(myY+5*Math.sin(Math.toRadians(myPointDirection))));
+    double dRadians=myPointDirection*(Math.PI/180);
+    line((int)myX, (int)myY, (int)(myX+5*Math.cos(dRadians)), (int)(myY+5*Math.sin(dRadians)));
   }
 }
 class Asteroid extends Floater
