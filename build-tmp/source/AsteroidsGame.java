@@ -23,7 +23,7 @@ public void setup()
 {
   size(500,500);
   background(0);
-  frameRate(5);
+  //frameRate(5);
   HMS_Euphoria=new SpaceShip();
   HMS_Euphoria.setX(width/2);
   HMS_Euphoria.setY(height/2);
@@ -350,7 +350,7 @@ class Laser
   {
     strokeWeight(3);
     stroke(myColor);
-    line((float)myX, (float)myY, (float)(myX+5*Math.cos(Math.toRadians(myPointDirection))), (float)(myY+5*Math.sin(Math.toRadians(myPointDirection))));
+    line((int)myX, (int)myY, (int)(myX+5*Math.cos(Math.toRadians(myPointDirection))), (int)(myY+5*Math.sin(Math.toRadians(myPointDirection))));
   }
 }
 class Asteroid extends Floater
@@ -427,9 +427,9 @@ class Asteroid extends Floater
     {     
       myCenterY = height;    
     }   
-    translate((float)myCenterX, (float)myCenterY);
+    translate((int)myCenterX, (int)myCenterY);
     rotate((int)myRotSpeed);
-    translate((float)-myCenterX, (float)-myCenterY);
+    translate((int)-myCenterX, (int)-myCenterY);
   }   
 }
 abstract class Floater
