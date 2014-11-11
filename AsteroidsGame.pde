@@ -13,11 +13,7 @@ public void setup()
   HMS_Euphoria.setY(height/2);
   pew=new Laser();
   for(int i=0;i<starField.length;i++) {starField[i]=new Star();}
-  for(int i=0;i<10;i++) 
-    {
-      Ragnarock.add(new Asteroid());
-      println("huh?");
-    }
+  for(int i=0;i<10;i++) {Ragnarock.add(new Asteroid());}
 }
 public void draw() 
 {
