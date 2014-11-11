@@ -340,6 +340,7 @@ class Laser
 class Asteroid extends Floater
 {
   double myRotSpeed;
+  int myDirectionOfRot;
   Asteroid()
   {
     int k=2;
@@ -356,6 +357,9 @@ class Asteroid extends Floater
     myDirectionX=Math.random()*2-0.95;
     myDirectionY=Math.random()*2-0.95;
     myPointDirection=0;
+    double x=Math.random();
+    if(x<=0.5) {myDirectionOfRot=1;}
+    if(x>0.5) {myDirectionOfRot=-1;}
     myRotSpeed=Math.random()*11-5;
     int i=(int)(Math.random()*4+1);
     if(i==1)
@@ -411,9 +415,7 @@ class Asteroid extends Floater
     {     
       myCenterY = height;    
     }   
-    translate((int)myCenterX, (int)myCenterY);
-    rotate((int)myRotSpeed);
-    translate((int)-myCenterX, (int)-myCenterY);
+    rotate(myDirectionOfRot*(int)(Math.random()*5+1));
   }   
 }
 abstract class Floater
