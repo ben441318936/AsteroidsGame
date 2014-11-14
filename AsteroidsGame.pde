@@ -17,7 +17,7 @@ public void setup()
 }
 public void draw() 
 {
-  if(HMS_Euphoria.getHyperspacing()==false /*&& HMS_Euphoria.getAccelerating()==false*/)
+  if(HMS_Euphoria.getHyperspacing()==false)
   {
     fill(0,0,0);
     rect(0,0,width,height);
@@ -26,23 +26,6 @@ public void draw()
   }
   if(HMS_Euphoria.getHyperspacing()==true || HMS_Euphoria.getAccelerating()==true)
   {
-    /*if(HMS_Euphoria.getAccelerating()==true)
-    {
-      if(HMS_Euphoria.getDirectionY()<=3 && HMS_Euphoria.getDirectionY()>=-3 && HMS_Euphoria.getDirectionX()>=-3 && HMS_Euphoria.getDirectionX()<=3)
-      {
-        fill(0,0,0,60);
-        rect(0, 0, width, height);
-        fill(255,255,255);
-        for(int i=0;i<starField.length;i++) {starField[i].show();}
-      }
-      else 
-      {
-        fill(0,0,0);
-        rect(0, 0, width, height); 
-        fill(255,255,255); 
-        for(int i=0;i<starField.length;i++) {starField[i].show();}
-      }
-    }*/
     if(HMS_Euphoria.getHyperspacing()==true)
     {
       fill(0,0,0,20);
@@ -76,6 +59,7 @@ public void keyPressed()
   {
     HMS_Euphoria.setHyperspacing(true);
     HMS_Euphoria.hyperspace();
+    
   }
   if(key==' ') {pew.setFired(true);}
   if(key==CODED)
@@ -418,6 +402,38 @@ class Asteroid extends Floater
     }   
     rotate(myDirectionOfRot*(int)(Math.random()*5+1));
   }   
+  public void reset()
+  {
+    myColor=colour(90,90,90);
+    myDirectionX=Math.random()*2-0.95;
+    myDirectionY=Math.random()*2-0.95;
+    myPointDirection=0;
+    double x=Math.random();
+    if(x<=0.5) {myDirectionOfRot=1;}
+    if(x>0.5) {myDirectionOfRot=-1;}
+    myRotSpeed=Math.random()*11-5;
+    int i=(int)(Math.random()*4+1);
+    if(i==1)
+    {
+      myCenterX=Math.random()*21;
+      myCenterY=Math.random()*21;
+    }
+    if(i==2)
+    {
+      myCenterX=Math.random()*21+480;
+      myCenterY=Math.random()*21;
+    }
+    if(i==3)
+    {
+      myCenterX=Math.random()*21;
+      myCenterY=Math.random()*21+480;
+    }
+    if(i==4)
+    {
+      myCenterX=Math.random()*21+480;
+      myCenterY=Math.random()*21+480;
+    }
+  }
 }
 abstract class Floater
 {   
