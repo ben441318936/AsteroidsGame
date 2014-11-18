@@ -81,6 +81,7 @@ public void keyReleased()
   } 
 }
 public int colour(int r, int g, int b) {return color(r,g,b);}
+public int colour(int x) {return color(x);}
 class Star
 {
   private double myX, myY;
