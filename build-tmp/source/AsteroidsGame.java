@@ -22,7 +22,7 @@ private ArrayList <Asteroid> Ragnarock=new ArrayList <Asteroid>();
 public void setup() 
 {
   size(500,500);
-  background(colour(0));
+  background(0);
   //frameRate(5);
   HMS_Euphoria=new SpaceShip();
   HMS_Euphoria.setX(width/2);
