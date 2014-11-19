@@ -35,6 +35,7 @@ public void draw()
 {
   if(HMS_Euphoria.getHyperspacing()==false)
   {
+    noStroke();
     fill(0,0,0);
     rect(0,0,width,height);
     fill(255,255,255);
@@ -44,6 +45,7 @@ public void draw()
   {
     if(HMS_Euphoria.getHyperspacing()==true)
     {
+      noStroke();
       fill(0,0,0,20);
       rect(0, 0, width, height);
       for(int i=0;i<starField.length;i++) {starField[i].show();}
@@ -55,15 +57,15 @@ public void draw()
       }
     }
   }
-  for(int i=0;i<Ragnarock.size();i++) 
-  {
-    Ragnarock.get(i).move();
-    Ragnarock.get(i).show();
-  }
   HMS_Euphoria.move();
   pew.move();
   pew.show();
   HMS_Euphoria.show();
+  for(int i=0;i<Ragnarock.size();i++) 
+  {
+    //Ragnarock.get(i).move();
+    Ragnarock.get(i).show();
+  }
   if(HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03f);}
   if(HMS_Euphoria.getLeftTurn()==true) {HMS_Euphoria.rotate(-2);}
   if(HMS_Euphoria.getRightTurn()==true) {HMS_Euphoria.rotate(2);}
@@ -97,7 +99,6 @@ public void keyReleased()
   } 
 }
 public int colour(int r, int g, int b) {return color(r,g,b);}
-public int colour(int x) {return color(x);}
 class Star
 {
   private double myX, myY;
@@ -110,6 +111,7 @@ class Star
   }
   public void show()
   {
+    noStroke();
     fill(myColor);
     ellipse((float)myX, (float)myY, 2, 2);
   }
@@ -323,7 +325,7 @@ class Laser
       double dRadians=myPointDirection*(Math.PI/180);
       myX=myX+Math.cos(dRadians)*mySpeed;
       myY=myY+Math.sin(dRadians)*mySpeed;
-      if(myX>width || myX<0 || myY>height || myY<0)
+      if(myX>width-1 || myX<0+1 || myY>height-1 || myY<0+1)
       {
         myColor=colour(0,0,0);
         fired=false;
@@ -336,7 +338,15 @@ class Laser
     strokeWeight(3);
     stroke(myColor);
     double dRadians=myPointDirection*(Math.PI/180);
+    if(get(myX,myY)==colour(90,90,90))
+    {
+      println("hit");
+    }
     line((int)myX, (int)myY, (int)(myX+5*Math.cos(dRadians)), (int)(myY+5*Math.sin(dRadians)));
+  }
+  public void hit()
+  {
+
   }
 }
 class Asteroid extends Floater
