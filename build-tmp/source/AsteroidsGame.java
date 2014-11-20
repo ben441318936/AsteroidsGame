@@ -63,6 +63,7 @@ public void draw()
   HMS_Euphoria.show();
   for(int i=0;i<Ragnarock.size();i++) 
   {
+    Ragnarock.get(i).hit();
     //Ragnarock.get(i).move();
     Ragnarock.get(i).show();
   }
@@ -99,6 +100,10 @@ public void keyReleased()
   } 
 }
 public int colour(int r, int g, int b) {return color(r,g,b);}
+public void collide() 
+{
+    
+}
 class Star
 {
   private double myX, myY;
@@ -294,9 +299,9 @@ class Laser
     fired=false;
     flying=false;
   }
-  public double getX() {return myX;}
+  public double getX() {return myX+5*Math.cos(myPointDirection*(Math.PI/180));}
   public void setX(double x) {myX=x;}
-  public double getY() {return myY;}
+  public double getY() {return myY+5*Math.sin(myPointDirection*(Math.PI/180));}
   public void setY(double y) {myY=y;}
   public double getPointDirection() {return myPointDirection;}
   public void setPointDirection(double x) {myPointDirection=x;}
@@ -304,6 +309,8 @@ class Laser
   public void setSpeed(int s) {mySpeed=s;}
   public boolean getFired() {return fired;}
   public void setFired(boolean x) {fired=x;}
+  public boolean getFlying() {return flying;}
+  public void setFlying(boolean x) {flying=x;}
   public void move()
   {
     if(fired==false && flying==false)
@@ -338,15 +345,7 @@ class Laser
     strokeWeight(3);
     stroke(myColor);
     double dRadians=myPointDirection*(Math.PI/180);
-    if(get(myX,myY)==colour(90,90,90))
-    {
-      println("hit");
-    }
     line((int)myX, (int)myY, (int)(myX+5*Math.cos(dRadians)), (int)(myY+5*Math.sin(dRadians)));
-  }
-  public void hit()
-  {
-
   }
 }
 class Asteroid extends Floater
@@ -459,6 +458,13 @@ class Asteroid extends Floater
     {
       myCenterX=Math.random()*21+480;
       myCenterY=Math.random()*21+480;
+    }
+  }
+  public void hit()
+  {
+    if(dist((float)myCenterX,(float)myCenterY,(float)(pew.getX()),(float)(pew.getY()))<=5)
+    {
+      println("hit");
     }
   }
 }
