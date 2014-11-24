@@ -72,8 +72,8 @@ public void draw()
     }
     if(gameover==false) {collision();}
     if (HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03);}
-    if (HMS_Euphoria.getLeftTurn()==true)     {HMS_Euphoria.rotate(-2);}
-    if (HMS_Euphoria.getRightTurn()==true)    {HMS_Euphoria.rotate(2);}
+    if (HMS_Euphoria.getLeftTurn()==true)     {HMS_Euphoria.rotate(-5);}
+    if (HMS_Euphoria.getRightTurn()==true)    {HMS_Euphoria.rotate(5);}
     if (HMS_Euphoria.getBraking()==true)      {HMS_Euphoria.brake();}
   }
 }

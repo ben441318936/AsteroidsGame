@@ -88,8 +88,8 @@ public void draw()
     }
     if(gameover==false) {collision();}
     if (HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03f);}
-    if (HMS_Euphoria.getLeftTurn()==true)     {HMS_Euphoria.rotate(-2);}
-    if (HMS_Euphoria.getRightTurn()==true)    {HMS_Euphoria.rotate(2);}
+    if (HMS_Euphoria.getLeftTurn()==true)     {HMS_Euphoria.rotate(-5);}
+    if (HMS_Euphoria.getRightTurn()==true)    {HMS_Euphoria.rotate(5);}
     if (HMS_Euphoria.getBraking()==true)      {HMS_Euphoria.brake();}
   }
 }
@@ -173,7 +173,7 @@ class Star
   {
     noStroke();
     fill(myColor);
-    ellipse((float)myX, (float)myY, 2, 2);
+    ellipse((int)myX, (int)myY, 2, 2);
   }
 }
 class SpaceShip extends Floater  
