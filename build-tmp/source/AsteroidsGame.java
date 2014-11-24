@@ -138,7 +138,6 @@ public void collision()
   if (Ragnarock.size()==0)
   {
     level=level+0.25f;
-    println(level);
     for (int i=0; i<10; i++)
     {
       Ragnarock.add(new Asteroid());
@@ -147,12 +146,12 @@ public void collision()
   }
   for (int i=0; i<Ragnarock.size (); i++)
   {
-    if (dist((float)(Ragnarock.get(i).myCenterX), (float)(Ragnarock.get(i).myCenterY), (float)(HMS_Euphoria.getX()), (float)(HMS_Euphoria.getY()))<=20)
+    if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(HMS_Euphoria.getX()), (int)(HMS_Euphoria.getY()))<=20)
     {
       Ragnarock.remove(i);
       gameover=true;
     }
-    if (dist((float)(Ragnarock.get(i).myCenterX), (float)(Ragnarock.get(i).myCenterY), (float)(pew.getX()), (float)(pew.getY()))<=12)
+    if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(pew.getX()), (int)(pew.getY()))<=12)
     {
       Ragnarock.remove(i);
       pew.setFired(false);
@@ -343,7 +342,7 @@ class SpaceShip extends Floater
   }
   public void reset()
   {
-    myCenterX=0;    myCenterY=0;
+    myCenterX=width/2;    myCenterY=height/2;
     myDirectionX=0; myDirectionY=0;
     myPointDirection=0;
     accelerating=false; braking=false;
