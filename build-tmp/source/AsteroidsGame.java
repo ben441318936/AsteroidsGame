@@ -148,7 +148,7 @@ public void collision()
   {
     if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(HMS_Euphoria.getX()), (int)(HMS_Euphoria.getY()))<=20)
     {
-      Ragnarock.remove(i);
+      level=0;
       gameover=true;
     }
     if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(pew.getX()), (int)(pew.getY()))<=12)

@@ -132,7 +132,7 @@ public void collision()
   {
     if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(HMS_Euphoria.getX()), (int)(HMS_Euphoria.getY()))<=20)
     {
-      Ragnarock.remove(i);
+      level=0;
       gameover=true;
     }
     if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(pew.getX()), (int)(pew.getY()))<=12)
@@ -157,7 +157,7 @@ class Star
   {
     noStroke();
     fill(myColor);
-    ellipse((float)myX, (float)myY, 2, 2);
+    ellipse((int)myX, (int)myY, 2, 2);
   }
 }
 class SpaceShip extends Floater  
