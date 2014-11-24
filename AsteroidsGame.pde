@@ -130,7 +130,7 @@ public void collision()
   }
   for (int i=0; i<Ragnarock.size (); i++)
   {
-    if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(HMS_Euphoria.getX()), (int)(HMS_Euphoria.getY()))<=20)
+    if (dist((int)(Ragnarock.get(i).myCenterX), (int)(Ragnarock.get(i).myCenterY), (int)(HMS_Euphoria.getX()), (int)(HMS_Euphoria.getY()))<=25)
     {
       level=0;
       gameover=true;
