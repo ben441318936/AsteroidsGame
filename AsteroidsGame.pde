@@ -344,7 +344,7 @@ class Laser
     myX=HMS_Euphoria.getX();
     myY=HMS_Euphoria.getY();
     myPointDirection=HMS_Euphoria.getPointDirection();
-    mySpeed=10;
+    mySpeed=15;
     myColor=colour(0, 0, 0);
     fired=false;
     flying=false;
