@@ -71,7 +71,7 @@ public void draw()
       Ragnarock.get(i).show();
     }
     if(gameover==false) {collision();}
-    if (HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.03);}
+    if (HMS_Euphoria.getAccelerating()==true) {HMS_Euphoria.accelerate(0.05);}
     if (HMS_Euphoria.getLeftTurn()==true)     {HMS_Euphoria.rotate(-5);}
     if (HMS_Euphoria.getRightTurn()==true)    {HMS_Euphoria.rotate(5);}
     if (HMS_Euphoria.getBraking()==true)      {HMS_Euphoria.brake();}
@@ -244,10 +244,10 @@ class SpaceShip extends Floater
   }
   public void move ()   //move the floater in the current direction of travel
   {      
-    if (myDirectionX>=3) {myDirectionX=3;}
-    if (myDirectionX<=-3) {myDirectionX=-3;}
-    if (myDirectionY>=3) {myDirectionY=3;}
-    if (myDirectionY<=-3) {myDirectionY=-3;}
+    if (myDirectionX>=2.5) {myDirectionX=2.5;}
+    if (myDirectionX<=-2.5) {myDirectionX=-2.5;}
+    if (myDirectionY>=2.5) {myDirectionY=2.5;}
+    if (myDirectionY<=-2.5) {myDirectionY=-2.5;}
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
